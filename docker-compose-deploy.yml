@@ -1,29 +1,26 @@
 version: '3'
 services:
   postgres:
-    # container_name: postgres
+    container_name: postgres
     image: postgres
     restart: always
-    env_file: .env
     environment:
-      POSTGRES_PASSWORD:
+      POSTGRES_PASSWORD: example
     ports:
       - 5432:5432
     networks:
       - hoppscotch
     volumes:
-      - ./data/postgresql/data:/var/lib/postgresql/data
+      - C:\Users\FLynn\Desktop\data\hoppscotch\data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
       timeout: 5s
       retries: 5
   hoppscotch:
-    # container_name: hoppscotch
-    image: ling7334/hoppscotch:dev
+    container_name: hoppscotch
+    image: ling7334/hoppscotch:latest
     env_file: .env
-    build: 
-      context: .
     ports:
       - 3000:3000
       - 3100:3100
